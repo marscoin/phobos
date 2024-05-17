@@ -1,13 +1,19 @@
-# *Marssight*
+<p align="center">
+  <a href="https://github.com/marscoin/phobos" title="Phobos">
+    <img alt="phobos" src="./public/images/phobos_dashboard.png" width="450"></img>
+  </a>
+</p>
 
-*Marssight* is an open-source Marscoin blockchain explorer with complete REST and websocket APIs based on Litesight.
-Litesight runs in NodeJS, uses AngularJS for the front-end and LevelDB for storage.
+# *Phobos*
 
-For a live version see [Marscoin explorer's homepage](http://explore1.marscoin.org/).
+*Phobos* is an open-source Marscoin blockchain explorer with complete REST and websocket APIs based on the original Litesight explorer.
+Phobos runs in NodeJS, uses AngularJS for the front-end and LevelDB for storage. It's an older version of nodejs for now, pull requests welcome to move it closer to the latest nodejs.
+
+For a live version see [Marscoin explorer's homepage](http://chain.marscoin.org/).
 
 ## Prerequisites
 
-* **Node.js v0.10.48** - Use nvm to install. We are currently improving the version support.
+* **Node.js v4.9** - Use nvm to install. Pull requests welcome.
 
 * **NPM** - Node.js package manager, should be automatically installed when you get Node.js.
 
@@ -17,7 +23,7 @@ For a live version see [Marscoin explorer's homepage](http://explore1.marscoin.o
 
   To install litesight, clone the main repository:
 
-    $ git clone https://github.com/marscoin/Marssight.git && cd Marssight
+    $ git clone https://github.com/marscoin/phobos.git && cd Marssight
 
   Install dependencies:
 
@@ -26,10 +32,12 @@ For a live version see [Marscoin explorer's homepage](http://explore1.marscoin.o
   Run the main application:
 
     $ ./launch.sh 
+
+  You might run into some error messages depending on your setup. Typical issues might involve rebuilding dependencies node-gyp@3.8 might help. If a package is missing check the package.json and try to get the correct version. Feel free to send an emailt to info@marscoin.org if you need help.
     
   Then open a browser and go to:
 
-    http://localhost:3000
+    http://localhost:5005
 
   Please note that the app will need to sync its internal database
   with the blockchain state, which may take some time. You can check
@@ -38,15 +46,6 @@ For a live version see [Marscoin explorer's homepage](http://explore1.marscoin.o
   
   
 ## Development
-
-To run litesight locally for development mode:
-
-Install bower dependencies:
-
-```
-$ npm install bower
-$ bower install
-```
 
 To compile and minify the web application's assets:
 
@@ -65,53 +64,7 @@ curl https://pyenv.run | bash
 pyenv install 2.7.18
 pyenv global 2.7.18
 
-In case you are developing *litesight* and *litesight-api* together, you can do the following:
-
-* Install litesight and litesight-api on the same path ($IROOT)
-
-```
-  $ cd $IROOT/Litesight
-  $ grunt
-```
-
-in other terminal:
-
-```
-  $ cd $IROOT/litesight-api
-  $ ln -s ../Litesight/public
-  $ INSIGHT_PUBLIC_PATH=public node insight.js 
-```
-
-
-``` 
-INSIGHT_PUBLIC_PATH=Litesight/public  grunt
-```
-
-at litesight-api's home path (edit the path according your setup).
-
-**also** in the Litesight-api path. (So you will have to grunt process running, one for litesight and one for litesight-api).
-
-
-```
-grunt compile
-```
-
-This action will create a template.pot file in ***po/*** folder. You can open
-it with some PO editor ([Poedit](http://poedit.net)). Read this [guide](http://angular-gettext.rocketeer.be/dev-guide/translate/) to learn how to edit/update/import PO files from a generated POT file. PO file will be generated inside po/ folder.
-
-If you make new changes, simply run **grunt compile** again to generate a new .pot template and the angular javascript ***js/translations.js***. Then (if use Poedit), open .po file and choose ***update from POT File*** from **Catalog** menu.
-
-Finally changes your default language from ***public/src/js/config*** 
-
-```
-gettextCatalog.currentLanguage = 'es';
-```
-
-This line will take a look at any *.po files inside ***po/*** folder, e.g.
-**po/es.po**, **po/nl.po**. After any change do not forget to run ***grunt
-compile***.
-
-
+There are two libraries this project depends on - Litesight-API and Litecore. They are part of this repository but may need recompiling. Follow the instructions of GPT when running ./launch.sh. Also make sure your local marscoind node has a full transaction index via the configuration option txindex=1.
 
 ## License
 (The MIT License)
