@@ -1,0 +1,36 @@
+  <div class="navbar-header">
+    <div id="mobile-menu">
+        <div class="left-nav-toggle">
+            <a href="#">
+                <i class="stroke-hamburgermenu"></i>
+            </a>
+        </div>
+    </div>
+    <a class="navbar-brand" href="index.html">
+        PHOBOS
+        <span>v.1.4</span>
+    </a>
+  </div>
+  <div id="navbar" class="navbar-collapse collapse">
+    <div class="left-nav-toggle">
+        <a href="">
+            <i class="stroke-hamburgermenu"></i>
+        </a>
+    </div>
+
+    <form id="search-form" data-ng-controller="SearchController" role="search" data-ng-submit="search()" class="navbar-form mr-auto" style="padding-top:5px;">
+
+      <div class="form-group" data-ng-class="{'has-error': badQuery}">
+          <input id="search" type="text" class="form-control" data-ng-model="q" data-ng-class="{'loading': loading}" placeholder="{{'Search for block, transaction or address'|translate}}" data-ng-submit="search()" focus="true" style="width: 475px">
+      </div>
+      <!-- <div class="no_matching text-danger" data-ng-show="badQuery" translate>No matching records found!</div> -->
+    </form>
+
+    <ul class="nav navbar-nav" data-ng-controller="StatusController">
+        <li class="nav-item uppercase-link" data-ng-init="getSync()">
+            <a href="/status" class="nav-link">Sync 
+                <span style="margin-top:0px;margin-left: 5px;" class="label label-warning pull-right">{{sync.syncPercentage}}%</span>
+            </a>
+        </li>
+    </ul>
+  </div>
