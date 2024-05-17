@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/marscoin/phobos" title="Phobos">
-    <img alt="phobos" src="./public/images/phobos_dashboard.png" width="450"></img>
+    <img alt="phobos" src="./public/images/phobos_dashboard.png" width="850"></img>
   </a>
 </p>
 
