@@ -205,12 +205,11 @@
 <div class="line-top row" data-ng-hide="!tx">
   <div class="col-xs-6 col-sm-4 col-md-4">
     <span data-ng-show="!tx.isCoinBase &&  !isNaN(parseFloat(tx.fees))"
-      class="txvalues txvalues-default"><span translate>Fee</span>: {{$root.currency.getConvertion(tx.fees) || tx.fees + 'MARS'}} </span>
+      class="btn btn-w-md btn-default"><span translate>Fee</span>: {{$root.currency.getConvertion(tx.fees) || tx.fees + 'MARS'}} </span>
   </div>
   <div class="col-xs-6 col-sm-8 col-md-8 text-right">
-    <span data-ng-show="tx.confirmations" class="txvalues
-      txvalues-success">{{tx.confirmations}} <span translate>Confirmations</span></span>
-    <span data-ng-show="!tx.confirmations" class="txvalues txvalues-danger" translate>Unconfirmed Transaction!</span>
-    <span class="txvalues txvalues-primary">{{$root.currency.getConvertion(tx.valueOut) || tx.valueOut + ' MARS' }}</span>
+    <span data-ng-show="tx.confirmations" class="btn btn-w-md btn-success">{{tx.confirmations}} <span translate>Confirmations</span></span>
+    <span data-ng-show="!tx.confirmations" class="btn btn-w-md btn-danger" translate>Unconfirmed Transaction!</span>
+    <span class="btn btn-w-md btn-primary">{{$root.currency.getConvertion(tx.valueOut) || tx.valueOut + ' MARS' }}</span>
   </div>
 </div>

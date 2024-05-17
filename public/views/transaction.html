@@ -10,13 +10,12 @@
           </div>
       </div>
       <div class="col-md-6 col-lg-5 text-right">
-        <span data-ng-show="tx.confirmations" class="txvalues
-          txvalues-success">{{tx.confirmations}} 
+        <span data-ng-show="tx.confirmations" class="btn btn-w-md btn-success">{{tx.confirmations}} 
           <span translate>Confirmations</span>
         </span>
         <span data-ng-show="!tx.confirmations" 
-          class="txvalues txvalues-danger" translate>Unconfirmed Transaction!</span>
-        <span class="txvalues txvalues-primary">{{$root.currency.getConvertion(tx.valueOut) || tx.valueOut + ' MARS' }}</span>
+          class="btn btn-w-md btn-danger" translate>Unconfirmed Transaction!</span>
+        <span class="btn btn-w-md btn-primary">{{$root.currency.getConvertion(tx.valueOut) || tx.valueOut + ' MARS' }}</span>
       </div>
     </div>
     <div class="hide_snavbar">
