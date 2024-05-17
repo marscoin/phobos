@@ -23,7 +23,7 @@ For a live version see [Marscoin explorer's homepage](http://phobos.marscoin.org
 
   To install litesight, clone the main repository:
 
-    $ git clone https://github.com/marscoin/phobos.git && cd Marssight
+    $ git clone https://github.com/marscoin/phobos.git && cd phobos
 
   Install dependencies:
 
