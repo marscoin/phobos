@@ -1,0 +1,173 @@
+<div class="container-fluid">
+  <div class="alert alert-danger" data-ng-show="flashMessage">
+      {{$root.flashMessage}}
+    </div>
+    <div data-ng-include src="'/views/includes/connection.html'"></div>
+  <div class="row" data-ng-controller="IndexController" data-ng-init="index()">
+  <div class="col-lg-8">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="view-header">
+                  <div class="pull-right text-right" style="line-height: 14px">
+                      <small>Phobus Explorer<br>Dashboard<br> <span class="c-white">v.1.4</span></small>
+                  </div>
+                  <div class="header-icon">
+                      <i class="pe page-header-icon pe-7s-shield"></i>
+                  </div>
+                  <div class="header-title">
+                      <h3 class="m-b-xs">Phobos Blockexplorer for Marscoin</h3>
+                      <small>
+                          Watch the Marscoin blockchain evolve over time and research past transaction and notarizations.
+                      </small>
+                  </div>
+              </div>
+              <hr>
+          </div>
+      </div>
+
+      <div class="row" data-ng-controller="StatusController" data-ng-init="loadStatus()">
+          <div class="col-lg-3 col-xs-6">
+              <div class="panel panel-filled">
+
+                  <div class="panel-body">
+                      <h2 class="m-b-none">
+                        {{info.blocks}} <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i> {{sync.syncPercentage}}%</span>
+                      </h2>
+
+                      <div class="small">Total Blocks</div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-xs-6">
+              <div class="panel panel-filled">
+                  <div class="panel-body">
+                      <h2 class="m-b-none">
+                        {{mininginfo.networkhashps | formatGiga}} <span class="slight"><i class="fa fa-play fa-rotate-90 c-white"> </i> GH/s</span>
+                      </h2>
+
+                      <div class="small">Network Hashrate</div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-xs-6">
+              <div class="panel panel-filled">
+                  <div class="panel-body">
+                      <h2 class="m-b-none">
+                        {{ info.difficulty | round }} <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i> +56%</span>
+                      </h2>
+
+                      <div class="small">Network Difficulty</div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-xs-6">
+              <div class="panel panel-filled">
+                  <div class="panel-body">
+                      <h2 class="m-b-none">
+                        {{networkinfo.connections}} <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i> +18%</span>
+                      </h2>
+
+                      <div class="small">Nodes Connected</div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+     
+        <div class="row">
+          <div class="col-md-12">
+              <div class="panel panel-filled">
+                  <div class="panel-body">
+                      <div class="stats-title">
+                          <h4><i class="fa fa-cube text-warning" aria-hidden="true"></i> Last Blocks</h4>
+                      </div>
+                      <div class="small">
+                          The most recent blocks verified and confirmed by the public blockchain.
+                      </div>
+                      <table class="table table-responsive-sm">
+                          <thead>
+                          <tr>
+                              <th translate>Height</th>
+                              <th translate>Age</th>
+                              <th class="text-right"><span class="ellipsis" translate>Transactions</span></th>
+                              <th class="text-right hidden-xs"><span class="ellipsis" translate>Mined by</span></th>
+                              <th class="text-right" translate>Size</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                              <tr data-ng-show="!blocks.length"><td colspan="5" translate>Waiting for blocks...</td></tr>
+                              <tr class="fader" data-ng-repeat='b in blocks'>
+                                <td>
+                                  <a href="/block/{{b.hash}}">{{b.height}}</a>
+                                </td>
+                                <td><span class="ellipsis">{{humanSince(b.time)}}</span></td>
+                                <td class="text-right">{{b.txlength}}</td>
+                                <td class="text-right hidden-xs"><a href="{{b.poolInfo.url}}" title="{{b.poolInfo.poolName}}" target="_blank" data-ng-show="b.poolInfo">{{b.poolInfo.poolName}}</a></td>
+                                <td class="text-right">{{b.size}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+              <div class="panel panel-filled">
+                  <div class="panel-body">
+                      <div class="stats-title">
+                          <h4><i class="fa fa-bolt text-warning" aria-hidden="true"></i> Recent Transactions</h4>
+                      </div>
+                      <div class="small">
+                          The most recent transactions seen in the mempool.
+                      </div>
+                      <table class="table table-responsive-sm">
+                          <thead>
+                          <tr>
+                            <th>TXID</th>
+                            <th class="text-right" translate>Amount</th>
+                            <th class="text-right" translate>USD</th>
+                            <th class="text-right" translate>Fee</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                            <tr data-ng-show="!txs.length"><td colspan="4" translate>Waiting for transactions...</td></tr>
+                            <tr class="fader" data-ng-repeat='tx in txs'>
+                              <td>
+                                <a class="ellipsis" href="/tx/{{tx.txid}}">{{tx.txid}}</a>
+                              </td>
+                              <td class="text-right"><span class="ellipsis">{{tx.valueOut}} MARS</span></td>
+                  
+                              <td class="text-right">
+                                <span class="ellipsis">{{$root.currency.getUSDEquivalent(tx.valueOut) || 'n/a' }}</span>
+                              </td>
+                            <td class="text-right">
+                                <span class="ellipsis">{{tx.fees | round4 }} MARS</span>
+                            </td>
+                  
+                            </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+      
+
+
+  </div>
+  <div class="col-lg-4">
+
+          <div class="panel panel-b-accent">
+              <div class="panel-body text-center p-m" style="padding: 1px !important;">
+                  
+                  <a target="_blank" href="https://www.martianrepublic.org/"></a><img src="images/banner_mrc.png" style="width: 100%"></a>
+
+              </div>
+          </div>
+
+  </div>
+  </div>
+</div>
