@@ -9,7 +9,7 @@
 *Phobos* is an open-source Marscoin blockchain explorer with complete REST and websocket APIs based on the original Litesight explorer.
 Phobos runs in NodeJS, uses AngularJS for the front-end and LevelDB for storage. It's an older version of nodejs for now, pull requests welcome to move it closer to the latest nodejs.
 
-For a live version see [Marscoin explorer's homepage](http://chain.marscoin.org/).
+For a live version see [Marscoin explorer's homepage](http://phobos.marscoin.org/).
 
 ## Prerequisites
 
