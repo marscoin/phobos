@@ -1,30 +1,5 @@
 <div data-ng-include src="'/views/includes/connection.html'"></div>
 <section data-ng-controller="transactionsController" data-ng-init="findThis()">
-  <div class="secondary_navbar hidden-xs hidden-sm" scroll data-ng-class="{'hidden': !secondaryNavbar}" data-ng-show="tx.txid" data-ng-init="hideSNavbar=0">
-    <div class="container" data-ng-if="!hideSNavbar">
-      <div class="col-md-6 col-lg-7 text-left">
-          <h3 translate>Transaction</h3>
-          <div class="ellipsis"> 
-            <small>{{tx.txid}}</small> 
-            <span class="btn-copy" clip-copy="tx.txid"></span>
-          </div>
-      </div>
-      <div class="col-md-6 col-lg-5 text-right">
-        <span data-ng-show="tx.confirmations" class="btn btn-w-md btn-success">{{tx.confirmations}} 
-          <span translate>Confirmations</span>
-        </span>
-        <span data-ng-show="!tx.confirmations" 
-          class="btn btn-w-md btn-danger" translate>Unconfirmed Transaction!</span>
-        <span class="btn btn-w-md btn-primary">{{$root.currency.getConvertion(tx.valueOut) || tx.valueOut + ' MARS' }}</span>
-      </div>
-    </div>
-    <div class="hide_snavbar">
-      <a href="#" data-ng-click="hideSNavbar=!hideSNavbar">
-        <span data-ng-show="hideSNavbar"><span class="text-muted glyphicon glyphicon-chevron-down"></span></span>
-        <span data-ng-show="!hideSNavbar"><span class="text-muted glyphicon glyphicon-chevron-up"></span></span>
-      </a>
-    </div>
-  </div>
   <div data-ng-if="tx.txid">
     <h1><span translate>Transaction</span> 
       <small data-ng-show="from_vin || from_vout">
